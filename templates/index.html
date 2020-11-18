@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<style type="text/css">
+  .header {
+  padding: 1px;
+  text-align: center;
+  background: #2c5282;
+  color: white;
+  font-size: 20px;
+} 
+.footer {
+  padding: 1px;
+  text-align: center;
+  background: #2c5282;
+  color: white;
+  font-size: 20px;
+} 
+</style>
+  
+  <style type="text/css">
+    header {
+      display: block;
+    }
+  </style>
+  <script>
+    function thisFileUpload() {
+        document.getElementById("file").click(); 
+    };
+  </script>
+
+  <title>index.html</title>
+  <link rel="stylesheet" type="text/css" href="./templates/bootstrap.css">
+</head>
+<body style="background-color:#ebf8ff;">
+ <CENTER>
+  <div class="header">
+  <p>Gallery</p>
+</div>
+  <form method="POST" action="" id="form" enctype="multipart/form-data">
+
+    <input type="file" id="file" name="uploadedfile">
+    
+
+  </form>
+    <hr>
+    {% for file in files %}
+      <img src="{{url_for('upload', filename=file)}}" style="width:300px" class="preview-image" id={{file}}>
+    {% endfor %}  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <div class="header">
+  <p>Fullstack Challenge - 2020</p>
+</div>
+  </CENTER>
+</body>
+  <script>
+    document.getElementById("file").onchange = function() {
+      console.log("inside onchange")
+      document.getElementById("form").submit();
+    };
+  </script>
+
+</html>
