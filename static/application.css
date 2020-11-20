@@ -1,0 +1,37 @@
+#container {
+   min-height:100%;
+   position:relative;
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+.header {
+  padding: 1px;
+  text-align: center;
+  background: #2c5282;
+  color: white;
+  font-size: 20px;
+} 
+.footer {
+    padding: 1px;
+    position: fixed;
+    text-align: center;
+    background: #2c5282;
+    color: white;
+    font-size: 20px;
+    bottom: 0;
+    width: 100%;
+}
+#upload_button {
+  display: inline-block;
+}
+#upload_button input[type=file] {
+  display:none;
+}
+.mybutton {
+	color: red;
+  background-color: #007bff;
+  border-color: #007bff;
+}

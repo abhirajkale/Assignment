@@ -2,7 +2,16 @@
 <html>
 <head>
 <style type="text/css">
-  .header {
+ #container {
+   min-height:100%;
+   position:relative;
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+.header {
   padding: 1px;
   text-align: center;
   background: #2c5282;
@@ -10,12 +19,21 @@
   font-size: 20px;
 } 
 .footer {
-  padding: 1px;
-  text-align: center;
-  background: #2c5282;
-  color: white;
-  font-size: 20px;
-} 
+    padding: 1px;
+    position: fixed;
+    text-align: center;
+    background: #2c5282;
+    color: white;
+    font-size: 20px;
+    bottom: 0;
+    width: 100%;
+}
+#upload_button {
+  display: inline-block;
+}
+#upload_button input[type=file] {
+  display:none;
+}
 </style>
   
   <style type="text/css">
@@ -30,34 +48,42 @@
   </script>
 
   <title>index.html</title>
-  <link rel="stylesheet" type="text/css" href="./templates/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/application.css">
 </head>
 <body style="background-color:#ebf8ff;">
- <CENTER>
-  <div class="header">
-  <p>Gallery</p>
-</div>
-  <form method="POST" action="" id="form" enctype="multipart/form-data">
+  <div id="container">
+    <CENTER>
+      <div class="header">
+        <p>Gallery</p>
+      </div>
+      <form method="POST" action="" id="form" enctype="multipart/form-data">
+        <div id="upload_button">
+          <label>
+            <input type="file" ngf-select ng-model="new_files" ng-change="fs.uploadFiles(new_files)" multiple id="file" name="uploadedfile">
+            <span class="mybutton btn btn-primary">Upload</span>
+          </label>
+        </div>
+      </form>
+      <hr>
+      {% for file in files %}
+        <img src="{{url_for('upload', filename=file)}}" style="width:400px" class="preview-image" id={{file}}>
+      {% endfor %}  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <div class="footer">
+        <p>Fullstack Challenge - 2020</p>
+      </div>
+    </CENTER>
+  </div>
+  <script type="text/javascript" src="js/bootstrap-filestyle.min.js"> 
+  $(":file").filestyle();
+  </script>
 
-    <input type="file" id="file" name="uploadedfile">
-    
-
-  </form>
-    <hr>
-    {% for file in files %}
-      <img src="{{url_for('upload', filename=file)}}" style="width:300px" class="preview-image" id={{file}}>
-    {% endfor %}  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <div class="header">
-  <p>Fullstack Challenge - 2020</p>
-</div>
-  </CENTER>
-</body>
   <script>
     document.getElementById("file").onchange = function() {
       console.log("inside onchange")
       document.getElementById("form").submit();
     };
   </script>
-
+</body>
 </html>
